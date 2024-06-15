@@ -11,7 +11,8 @@ import (
 func main() {
 	log.Println("Starting Railroad Control Panel, wish us luck")
 
-	heyButton := hardware.NewTestButton("HeyButton")
+	//heyButton := hardware.NewTestButton("HeyButton")
+	heyButton := hardware.NewChildButton()
 
 	heyButton.AddEventListener(func(e *event.Event[hardware.ButtonState, hardware.Button]) {
 		log.Println("Got an event from", e.Payload().Name(), e.Payload().State())

@@ -1,6 +1,8 @@
 package hardware
 
 import (
+	"log"
+
 	"github.com/ZacharyDuve/RRControlPanelSvr/src/event"
 	"github.com/google/uuid"
 )
@@ -68,4 +70,26 @@ func (this *baseButton) Press() {
 
 func (this *baseButton) Release() {
 	this.updateState(Released)
+}
+
+type childButton struct {
+	baseButton
+}
+
+func (this *childButton) Press() {
+	log.Println("Child button pressed")
+	this.baseButton.Press()
+}
+
+func (this *childButton) Release() {
+	log.Println("Child button release")
+	this.baseButton.Release()
+}
+
+func NewChildButton() TestButton {
+	cB := &childButton{}
+
+	cB.name = "I am a child"
+
+	return cB
 }
